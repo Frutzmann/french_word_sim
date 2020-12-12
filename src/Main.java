@@ -3,9 +3,9 @@ import java.util.HashMap;
 public class Main {
     public static void main(String[] args) {
 
-        HashMap<Character, Integer> m;
-        HashMap<Character, Integer> m1;
-        HashMap<String, Integer> m2;
+        HashMap<Character, Frequencies> m;
+        HashMap<Character, Frequencies> m1;
+        HashMap<String, Frequencies> m2;
 
         FrenchWords r = new FrenchWords();
         m = r.getMapWord();
@@ -15,6 +15,7 @@ public class Main {
         System.out.println(m);
         System.out.println(m1);
         System.out.println(m2);
+
 
 
 

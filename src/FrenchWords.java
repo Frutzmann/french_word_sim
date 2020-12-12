@@ -44,8 +44,13 @@ public class FrenchWords implements WordGenerator {
                 EveryLetterFilter(input.toLowerCase());
                 FirstLetterFilter(input.toLowerCase());
                 suitLetterFilter(input.toLowerCase());
-                
+
             }
+
+            evalRelativeFrequencies(mapWord, letterNumber);
+            evalRelativeFrequencies(mapLetter, firstLetterNumber);
+            evalRelativeFrequencies(suitLetter, suitLetterNumber);
+
 
         } catch (Exception e) {
             System.out.println("Reading: " + e);
@@ -66,6 +71,7 @@ public class FrenchWords implements WordGenerator {
     public void FirstLetterFilter(String s) {
         f = checkMap(mapLetter, s.charAt(0));
         mapLetter.put(s.charAt(0), f);
+        firstLetterNumber++;
 
     }
 
@@ -87,7 +93,6 @@ public class FrenchWords implements WordGenerator {
             suitLetterNumber++;
         }
 
-
     }
 
     private <E> Frequencies checkMap(HashMap<E, Frequencies> m, E c) {
@@ -102,6 +107,15 @@ public class FrenchWords implements WordGenerator {
             f = new Frequencies(1, 0);
         }
         return f;
+    }
+
+    private <E> void evalRelativeFrequencies(HashMap<E,Frequencies> m, int number) {
+        m.forEach((k, v) -> {
+            f = m.get(k);
+            f.setRelFrequency((float) v.getFrequency()/number);
+            m.put(k, f);
+        });
+
     }
 
     public HashMap<Character, Frequencies> getMapWord() {

@@ -19,7 +19,7 @@ public class Frequencies  {
         return relFrequency;
     }
 
-    public void setRelFrequency(int relFrequency) {
+    public void setRelFrequency(float relFrequency) {
         this.relFrequency = relFrequency;
     }
 

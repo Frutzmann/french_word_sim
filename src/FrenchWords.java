@@ -133,5 +133,4 @@ public class FrenchWords implements WordGenerator {
     public int getLetterNumber() {
         return letterNumber;
     }
-
 }

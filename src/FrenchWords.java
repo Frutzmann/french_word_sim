@@ -18,20 +18,20 @@ public class FrenchWords implements WordGenerator {
 
     private Frequencies f;
 
-
-
-
     public FrenchWords() {
         mapWord = new HashMap<>();
         mapLetter = new HashMap<>();
         suitLetter = new HashMap<>();
         letterNumber = 0;
-        read();
+        firstLetterNumber = 0;
+        suitLetterNumber = 0;
+        read(filename);
     }
 
 
+
     @Override
-    public void read() {
+    public void read(String filename) {
 
         String input;
         try {
@@ -87,7 +87,7 @@ public class FrenchWords implements WordGenerator {
             String c1 = Character.toString(s.charAt(i));
             String c2 = Character.toString(s.charAt(i + secondLetter));
             String c3 = Character.toString(s.charAt(i + thirdLetter));
-            s1 = c1 + c2 + c3;
+            s1 = c1 + ":" +  c2 + c3;
             f = checkMap(suitLetter, s1);
             suitLetter.put(s1, f);
             suitLetterNumber++;
@@ -128,9 +128,5 @@ public class FrenchWords implements WordGenerator {
 
     public HashMap<String, Frequencies> getSuitLetter() {
         return suitLetter;
-    }
-
-    public int getLetterNumber() {
-        return letterNumber;
     }
 }

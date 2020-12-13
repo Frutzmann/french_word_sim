@@ -1,6 +1,6 @@
 import java.util.HashMap;
 import java.util.Map;
-
+/////////////CREATION DU MOT////////////
 //Inspiré de : https://stackoverflow.com/questions/6737283/weighted-randomness-in-java
 
 public class ComputeWord {
@@ -8,7 +8,7 @@ public class ComputeWord {
     private int stringLength;
     double random;
 
-    FrenchWords f = new FrenchWords();
+    Dictionnary f = new Dictionnary();
 
     public ComputeWord(int stringLength) {
         this.stringLength = stringLength;
@@ -20,9 +20,11 @@ public class ComputeWord {
 
 
     public <E> void generate() {
+        //Initalisation du mot avec la première lettre
         computeLetter(f.getMapLetter(), Math.random());
         while (stringLength != 0) {
             random = Math.random();
+            //Si la longueur de la chaine le permet, sélection d'une suite de lettres, sinon sélection d'une seule lettre
             if (stringLength <= 2)
                 computeLetter(f.getMapWord(), random);
             else {
@@ -33,14 +35,16 @@ public class ComputeWord {
     }
 
     public <E> void computeLetter(HashMap<E, Frequencies> m, double random) {
-
+        //Parcours du HashMap
         for (Map.Entry<E, Frequencies> entry : m.entrySet()) {
             E k = entry.getKey();
             Frequencies v = entry.getValue();
             random -= v.getRelFrequency();
+            //Si le random se rapproche de la valeur de la fréquence relative
             if (random <= v.getRelFrequency()) {
                 stringLength -= k.toString().length();
                 System.out.println(k.toString());
+                //Ajout de la lettre au mot
                 word.append(k.toString());
                 return;
             }
@@ -55,8 +59,10 @@ public class ComputeWord {
         for (Map.Entry<E, Frequencies> entry : m.entrySet()) {
             String []split = entry.getKey().toString().split(":");
             Frequencies v = entry.getValue();
+            //On recherche les suites de lettre dont la première lettre commence par la dernière lettre du mot
             if(split[0].equals(String.valueOf(c)))
             {
+                //Si les deux premières lettres sont identiques
                 if(split[1].charAt(0) != c || word.length() > 1)
                 {
                     totalWeight += v.getRelFrequency();
@@ -68,10 +74,11 @@ public class ComputeWord {
         random = Math.random()*totalWeight;
         computeLetter(tempMap, random);
     }
-
+    //Verification des deux dernières lettres
     private void checkLastLetters(StringBuilder word) {
         if(word.length() >= 2)
         {
+            //Si les deux dernières lettres sont identiques
             if(word.charAt(word.length()-1) == word.charAt(word.length()-2))
             {
                 word.deleteCharAt(word.length()-1);
@@ -79,7 +86,7 @@ public class ComputeWord {
             }
         }
     }
-
+    //Verification du nombre de lettres identiques consécutives
     private void checkConsecutiveLetters(StringBuilder word) {
         String s;
         for(int i = 0; i < word.length()-3; i++)

@@ -1,6 +1,6 @@
 public class Frequencies  {
-    private int frequency;
-    private float relFrequency;
+    private int frequency; ///=Fréquence de la lettre
+    private float relFrequency;///=Fréquence relative de la lettre
 
     public Frequencies(int frequency, float relFrequency) {
         this.frequency = frequency;

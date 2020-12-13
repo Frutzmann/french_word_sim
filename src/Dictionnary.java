@@ -3,21 +3,21 @@ import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
-
-public class FrenchWords implements ReadDictionnary {
+/////////////LECTURE DU FICHIER ET INITALISATION DES HASHMAPS/////////////////////
+public class Dictionnary implements ReadDictionnary {
 
     private static String filename = "./file/mots_francais.txt";
-
-    private HashMap<Character, Frequencies> mapWord;
-    private HashMap<Character, Frequencies> mapLetter;
-    private HashMap<String, Frequencies> suitLetter;
+    //Initialisation des maps et variables
+    private HashMap<Character, Frequencies> mapWord; //Contient toutes les lettres de tout les mots
+    private HashMap<Character, Frequencies> mapLetter; //Contient toutes les premieres lettres de tous les mots
+    private HashMap<String, Frequencies> suitLetter; //Contient toutes les deux premières lettres suivant une lettre de tous les mots
     private int letterNumber;
     private int firstLetterNumber;
     private int suitLetterNumber;
 
     private Frequencies f;
 
-    public FrenchWords() {
+    public Dictionnary() {
         mapWord = new HashMap<>();
         mapLetter = new HashMap<>();
         suitLetter = new HashMap<>();
@@ -34,6 +34,7 @@ public class FrenchWords implements ReadDictionnary {
 
         String input;
         try {
+            //Ouverture et lecture du fichier en UTF-8
             FileInputStream fis = new FileInputStream(filename);
             InputStreamReader isr = new InputStreamReader(fis, StandardCharsets.UTF_8);
             BufferedReader br = new BufferedReader(isr);
@@ -55,7 +56,7 @@ public class FrenchWords implements ReadDictionnary {
             System.out.println("Reading: " + e);
         }
     }
-
+    //Parcours et insertion de chaque lettre du String dans le HashMap
     @Override
     public void EveryLetterFilter(String s) {
 
@@ -65,7 +66,7 @@ public class FrenchWords implements ReadDictionnary {
             letterNumber++;
         }
     }
-
+    //Parcours et insertion de chaque première lettre dans le HashMap
     @Override
     public void FirstLetterFilter(String s) {
         f = checkMap(mapLetter, s.charAt(0));
@@ -75,7 +76,7 @@ public class FrenchWords implements ReadDictionnary {
     }
 
 
-
+    //Parcours et insertion de chaque suite de lettre dans le HashMap
     @Override
     public void suitLetterFilter(String s) {
 
@@ -93,7 +94,9 @@ public class FrenchWords implements ReadDictionnary {
         }
 
     }
-
+    //On verifie si la Map contient déjà la lettre
+    //Si oui, on incrémente sa fréquence
+    //Si non on l'ajoute à la Map et instancie une nouvelle Fréquence
     private <E> Frequencies checkMap(HashMap<E, Frequencies> m, E c) {
         if(m.containsKey(c))
         {
@@ -107,7 +110,7 @@ public class FrenchWords implements ReadDictionnary {
         }
         return f;
     }
-
+    //Calcul des fréquences relatives de chaque lettre d'une Map
     private <E> void evalRelativeFrequencies(HashMap<E,Frequencies> m, int number) {
         m.forEach((k, v) -> {
             f = m.get(k);

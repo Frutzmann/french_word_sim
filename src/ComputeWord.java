@@ -18,6 +18,7 @@ public class ComputeWord {
 
     }
 
+
     public <E> void generate() {
         computeLetter(f.getMapLetter(), Math.random());
         while (stringLength != 0) {
@@ -46,7 +47,11 @@ public class ComputeWord {
                 return;
             }
         }
+        checkLastLetters(word);
+        checkConsecutiveLetters(word);
     }
+
+
 
     private <E> void computeSuit(HashMap<E, Frequencies> m, char c) {
         HashMap<String, Frequencies> tempMap = new HashMap<>();
@@ -66,6 +71,32 @@ public class ComputeWord {
         }
         random = Math.random()*totalWeight;
         computeLetter(tempMap, random);
+    }
+
+    private void checkLastLetters(StringBuilder word) {
+        if(word.length() >= 2)
+        {
+            if(word.charAt(word.length()-1) == word.charAt(word.length()-2))
+            {
+                word.deleteCharAt(word.length()-1);
+                computeLetter(f.getMapWord(), Math.random());
+            }
+        }
+    }
+
+    private void checkConsecutiveLetters(StringBuilder word) {
+        String s;
+        for(int i = 0; i < word.length()-3; i++)
+        {
+            if((word.charAt(i) == word.charAt(i+1)) && (word.charAt(i+1) == word.charAt(i+2)))
+            {
+                s = word.substring(i+3, word.length());
+                System.out.println("S: " + s);
+                word.delete(i+2, word.length());
+                computeLetter(f.getMapWord(), Math.random());
+                word.append(s);
+            }
+        }
     }
 
 

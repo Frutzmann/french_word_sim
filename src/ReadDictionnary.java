@@ -1,6 +1,6 @@
 import java.util.HashMap;
 
-public interface WordGenerator {
+public interface ReadDictionnary {
     void read(String filename);
     void EveryLetterFilter(String s);
     void FirstLetterFilter(String s);

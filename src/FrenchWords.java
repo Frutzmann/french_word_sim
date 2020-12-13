@@ -1,11 +1,10 @@
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
-import java.lang.reflect.GenericDeclaration;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 
-public class FrenchWords implements WordGenerator {
+public class FrenchWords implements ReadDictionnary {
 
     private static String filename = "./file/mots_francais.txt";
 
@@ -87,7 +86,7 @@ public class FrenchWords implements WordGenerator {
             String c1 = Character.toString(s.charAt(i));
             String c2 = Character.toString(s.charAt(i + secondLetter));
             String c3 = Character.toString(s.charAt(i + thirdLetter));
-            s1 = c1 + ":" +  c2 + c3;
+            s1 = c1 + ":" + c2 + c3;
             f = checkMap(suitLetter, s1);
             suitLetter.put(s1, f);
             suitLetterNumber++;
@@ -128,5 +127,9 @@ public class FrenchWords implements WordGenerator {
 
     public HashMap<String, Frequencies> getSuitLetter() {
         return suitLetter;
+    }
+
+    public int getLetterNumber() {
+        return letterNumber;
     }
 }

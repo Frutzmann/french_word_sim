@@ -129,7 +129,4 @@ public class FrenchWords implements ReadDictionnary {
         return suitLetter;
     }
 
-    public int getLetterNumber() {
-        return letterNumber;
-    }
 }

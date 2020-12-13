@@ -32,9 +32,7 @@ public class ComputeWord {
         System.out.println(word);
     }
 
-
     public <E> void computeLetter(HashMap<E, Frequencies> m, double random) {
-
 
         for (Map.Entry<E, Frequencies> entry : m.entrySet()) {
             E k = entry.getKey();
@@ -50,8 +48,6 @@ public class ComputeWord {
         checkLastLetters(word);
         checkConsecutiveLetters(word);
     }
-
-
 
     private <E> void computeSuit(HashMap<E, Frequencies> m, char c) {
         HashMap<String, Frequencies> tempMap = new HashMap<>();
@@ -91,13 +87,10 @@ public class ComputeWord {
             if((word.charAt(i) == word.charAt(i+1)) && (word.charAt(i+1) == word.charAt(i+2)))
             {
                 s = word.substring(i+3, word.length());
-                System.out.println("S: " + s);
                 word.delete(i+2, word.length());
                 computeLetter(f.getMapWord(), Math.random());
                 word.append(s);
             }
         }
     }
-
-
 }
